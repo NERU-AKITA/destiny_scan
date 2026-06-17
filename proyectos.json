@@ -1,1 +1,12 @@
-
+[
+  {
+    "manga": "Nombre del Manga",
+    "capitulo": "1 - Por Aquel Que Traduce",
+    "folderId": "PEGAR_ID_DE_LA_CARPETA_AQUI"
+  },
+  {
+    "manga": "Nombre del Manga",
+    "capitulo": "2",
+    "folderId": "PEGAR_ID_DE_LA_CARPETA_AQUI"
+  }
+]
