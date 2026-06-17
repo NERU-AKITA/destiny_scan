@@ -1,74 +1,102 @@
 // ==========================================
 // CONFIGURACIÓN OFICIAL - DESTINY SCAN
-// =========================================
+// ==========================================
 const GITHUB_USER = 'shadow-jack2';       
 const GITHUB_REPO = 'destiny_scan';   
 const BRANCH = 'main';                  
 
 const gridContainer = document.getElementById('manga-grid');
+const loader = document.getElementById('loader');
+const searchInput = document.getElementById('searchInput');
+const noResultsMsg = document.getElementById('no-results');
 
-// Función principal que lee la carpeta proyectos
+let proyectosGlobales = []; // Aquí guardaremos las obras para poder buscarlas rápido
+
+// Función principal
 async function cargarProyectos() {
     try {
-        // Pedimos a la API de GitHub el contenido de la carpeta 'proyectos'
         const respuesta = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/proyectos`);
         
-        if (!respuesta.ok) {
-            throw new Error('No se pudo acceder a la carpeta proyectos. Verifica que no esté vacía.');
-        }
+        if (!respuesta.ok) throw new Error('No se pudo acceder a los proyectos.');
 
         const datos = await respuesta.json();
+        
+        // Guardamos solo las carpetas
+        proyectosGlobales = datos.filter(item => item.type === 'dir');
 
-        // Filtramos para asegurarnos de que solo agarre las carpetas de las obras
-        const carpetasObras = datos.filter(item => item.type === 'dir');
+        // Ocultamos el loader y mostramos el grid
+        loader.classList.add('hidden');
+        gridContainer.classList.remove('hidden');
 
-        if(carpetasObras.length === 0) {
-            gridContainer.innerHTML = '<p style="text-align: center; width: 100%;">Aún no hay obras en la carpeta proyectos.</p>';
+        if(proyectosGlobales.length === 0) {
+            gridContainer.innerHTML = '<p style="text-align:center; width:100%;">No hay obras disponibles.</p>';
             return;
         }
 
-        // Limpiamos el contenedor por si acaso
-        gridContainer.innerHTML = '';
-
-        // Por cada carpeta de obra encontrada, generamos su tarjeta
-        carpetasObras.forEach(obra => {
-            crearTarjetaObra(obra.name);
-        });
+        renderizarObras(proyectosGlobales);
 
     } catch (error) {
-        console.error("Error:", error);
-        gridContainer.innerHTML = `<p style="color: #ff6b6b; grid-column: 1/-1; text-align: center;">Error al cargar: ${error.message}</p>`;
+        loader.classList.add('hidden');
+        gridContainer.classList.remove('hidden');
+        gridContainer.innerHTML = `<p style="color: #ef4444; text-align:center; width:100%;">Error: ${error.message}</p>`;
     }
 }
 
-// Función que dibuja la tarjeta en el HTML
+// Función que dibuja las tarjetas basándose en una lista
+function renderizarObras(listaObras) {
+    gridContainer.innerHTML = ''; // Limpiamos antes de dibujar
+
+    if(listaObras.length === 0) {
+        noResultsMsg.classList.remove('hidden');
+    } else {
+        noResultsMsg.classList.add('hidden');
+        listaObras.forEach(obra => {
+            crearTarjetaObra(obra.name);
+        });
+    }
+}
+
+// Generador de tarjetas individual
 function crearTarjetaObra(titulo) {
     const tarjeta = document.createElement('div');
     tarjeta.className = 'manga-card';
 
-    // encodeURIComponent codifica correctamente los espacios y tildes para la URL
     const folderNameEncoded = encodeURIComponent(titulo);
     const baseUrl = `https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_REPO}/${BRANCH}/proyectos/${folderNameEncoded}`;
     
     const urlPng = `${baseUrl}/icon.png`;
     const urlJpg = `${baseUrl}/icon.jpg`;
 
-    // Estructura de la tarjeta: intenta cargar icon.png; si no existe, salta a icon.jpg
     tarjeta.innerHTML = `
         <div class="cover-container">
-            <img src="${urlPng}" onerror="this.onerror=null; this.src='${urlJpg}';" alt="Portada de ${titulo}">
+            <img src="${urlPng}" onerror="this.onerror=null; this.src='${urlJpg}';" alt="${titulo}">
         </div>
-        <p class="manga-title">${titulo}</p>
+        <div class="manga-info">
+            <p class="manga-title">${titulo}</p>
+        </div>
     `;
 
-    // Acción al hacer clic sobre la obra
+    // Futura redirección al lector
     tarjeta.onclick = () => {
-        console.log(`Abriendo: ${titulo}`);
-        alert(`¡Próximamente! Aquí se abrirá la lista de capítulos para: ${titulo}`);
+        // Ejemplo de cómo será la URL futura:
+        // window.location.href = `lector.html?obra=${folderNameEncoded}`;
+        alert(`Abriendo índice de capítulos para: ${titulo}`);
     };
 
     gridContainer.appendChild(tarjeta);
 }
 
-// Inicializar la carga automática
+// Buscador en tiempo real
+searchInput.addEventListener('input', (e) => {
+    const terminoBusqueda = e.target.value.toLowerCase();
+    
+    // Filtramos el array que guardamos al principio
+    const obrasFiltradas = proyectosGlobales.filter(obra => 
+        obra.name.toLowerCase().includes(terminoBusqueda)
+    );
+    
+    renderizarObras(obrasFiltradas);
+});
+
+// Arrancamos la app
 cargarProyectos();
