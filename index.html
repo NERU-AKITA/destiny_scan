@@ -3,44 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyectos del Scan</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Destiny Scan</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>Nuestro Catálogo</h1>
-        <button id="back-btn" class="hidden">Volver al Inicio</button>
+        <h1>Destiny Scan</h1>
     </header>
-
-    <main id="catalog-view">
-        <div id="loading-msg">Cargando proyectos desde Drive...</div>
-        <div class="grid-container" id="manga-grid">
-            </div>
-    </main>
-
-    <main id="reader-view" class="hidden">
-        <h2 id="manga-title">Título del Manga</h2>
-        
-        <div class="chapter-selector-container">
-            <label for="chapter-select">Capítulo: </label>
-            <select id="chapter-select">
-                </select>
-        </div>
-        
-        <div class="controls">
-            <button id="prev-btn" disabled>Anterior</button>
-            <span id="page-info">Cargando páginas...</span>
-            <button id="next-btn" disabled>Siguiente</button>
-        </div>
-        
-        <div class="image-wrapper">
-            <img id="manga-image" src="" alt="Página del manga">
-        </div>
-        
-        <div class="controls bottom-controls">
-            <button id="prev-btn-bottom" disabled>Anterior</button>
-            <button id="next-btn-bottom" disabled>Siguiente</button>
-        </div>
+    
+    <main>
+        <div id="manga-grid" class="grid-container"></div>
     </main>
 
     <script src="script.js"></script>
