@@ -1,6 +1,6 @@
 // ==========================================
 // CONFIGURACIÓN OFICIAL - DESTINY SCAN
-// ==========================================
+// =========================================
 const GITHUB_USER = 'shadow-jack2';       
 const GITHUB_REPO = 'destiny_scan';   
 const BRANCH = 'main';                  
