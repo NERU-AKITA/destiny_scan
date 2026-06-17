@@ -3,17 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Destiny Scan</title>
+    <title>Destiny Scan | Visor Oficial</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Destiny Scan</h1>
+
+    <nav class="navbar">
+        <div class="nav-brand">Destiny Scan</div>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Buscar obra...">
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>Nuestros Proyectos</h1>
+        <p>Explora nuestras traducciones más recientes</p>
     </header>
-    
+
     <main>
-        <div id="manga-grid" class="grid-container"></div>
+        <div id="loader" class="loader"></div>
+        
+        <div id="manga-grid" class="grid-container hidden"></div>
+        
+        <div id="no-results" class="hidden">No se encontraron obras con ese nombre.</div>
     </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 Destiny Scan. Todos los derechos reservados.</p>
+            <p class="staff-credits">Owner: Aquel Que Traduce | Dev, Typer, Cleaner & Traductor: Neru</p>
+        </div>
+    </footer>
 
     <script src="script.js"></script>
 </body>
