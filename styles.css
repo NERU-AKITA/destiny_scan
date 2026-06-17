@@ -100,7 +100,7 @@ h1 {
     font-weight: 600;
 }
 
-/* --- VISTA LECTOR --- */
+/* --- VISTA LECTOR Y SELECTOR --- */
 #reader-view {
     width: 100%;
     max-width: 900px;
@@ -114,6 +114,33 @@ h1 {
     color: var(--accent-hover);
     margin-bottom: 15px;
     text-align: center;
+}
+
+.chapter-selector-container {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+    color: var(--text-muted);
+}
+
+select {
+    background-color: var(--card-bg);
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    padding: 8px 15px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+select:focus {
+    border-color: var(--accent-color);
+    box-shadow: var(--glow);
 }
 
 .image-wrapper {
