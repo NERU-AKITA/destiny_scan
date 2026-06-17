@@ -1,6 +1,6 @@
 // === CONFIGURACIÓN ===
 const API_KEY = 'AIzaSyDaoyZ2z39X0tyOUhQiNJmbnRmUX28XcI0'; 
-const MASTER_FOLDER_ID = '16a5mYYvEuVwFIciW9RmmJ6Hg0RAh-BQ_'; 
+const MASTER_FOLDER_ID = '1VbzLJKIL-ZGiRQTClIwrVCp-uFeaARwu'; 
 // =====================
 
 // Variables globales
