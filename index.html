@@ -3,29 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visor del Scan</title>
+    <title>Proyectos del Scan</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>Visor de Proyectos</h1>
-        <div class="selector-container">
-            <label for="chapter-select">Selecciona un capítulo:</label>
-            <select id="chapter-select">
-                <option value="">Cargando proyectos...</option>
-            </select>
-        </div>
+        <h1>Nuestro Catálogo</h1>
+        <button id="back-btn" class="hidden">Volver al Inicio</button>
     </header>
 
-    <main id="viewer-container">
+    <main id="catalog-view">
+        <div id="loading-msg">Cargando proyectos desde Drive...</div>
+        <div class="grid-container" id="manga-grid">
+            </div>
+    </main>
+
+    <main id="reader-view" class="hidden">
+        <h2 id="manga-title">Título del Manga</h2>
+        
         <div class="controls">
             <button id="prev-btn" disabled>Anterior</button>
-            <span id="page-info">Selecciona un capítulo para empezar</span>
+            <span id="page-info">Cargando páginas...</span>
             <button id="next-btn" disabled>Siguiente</button>
         </div>
         
         <div class="image-wrapper">
-            <img id="manga-image" src="" alt="Página del manga" style="display:none;">
+            <img id="manga-image" src="" alt="Página del manga">
+        </div>
+        
+        <div class="controls bottom-controls">
+            <button id="prev-btn-bottom" disabled>Anterior</button>
+            <button id="next-btn-bottom" disabled>Siguiente</button>
         </div>
     </main>
 
