@@ -1,96 +1,184 @@
 :root {
-    /* Paleta de colores Dark Purple */
-    --bg-base: #100517;       /* Fondo general, casi negro-morado */
-    --bg-card: #201136;       /* Fondo de las tarjetas de las obras */
-    --purple-border: #4a2377; /* Morado medio para bordes */
-    --purple-accent: #8b5cf6; /* Morado brillante para resaltar (hover) */
-    --text-main: #e5d9f2;     /* Texto principal, suave a la vista */
-    --text-title: #ffffff;    /* Blanco para el título del scan */
+    --bg-dark: #0a040f;        /* Fondo principal súper oscuro */
+    --bg-nav: rgba(20, 9, 30, 0.85); /* Barra superior semitransparente */
+    --bg-card: #160a22;        /* Fondo de tarjetas */
+    --primary: #8b5cf6;        /* Morado brillante (acentos y botones) */
+    --primary-hover: #a78bfa;  /* Morado más claro para hover */
+    --text-main: #f3e8ff;      /* Blanco con toque morado para lectura cómoda */
+    --text-muted: #a3a3a3;     /* Gris para subtítulos */
+    --border-color: #2e1065;   /* Bordes sutiles */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
 body {
-    background-color: var(--bg-base);
+    background-color: var(--bg-dark);
     color: var(--text-main);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
+}
+
+/* --- Navegación --- */
+.navbar {
+    position: sticky;
+    top: 0;
+    background: var(--bg-nav);
+    backdrop-filter: blur(10px); /* Efecto cristal */
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    z-index: 1000;
 }
 
-/* Cabecera */
-header {
-    width: 100%;
-    background-color: var(--bg-card);
-    padding: 25px 0;
+.nav-brand {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-main);
+    text-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
+    letter-spacing: 1px;
+}
+
+.search-box input {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    outline: none;
+    transition: 0.3s;
+    width: 250px;
+}
+
+.search-box input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 10px rgba(139, 92, 246, 0.2);
+}
+
+/* --- Hero Section --- */
+.hero {
     text-align: center;
-    border-bottom: 4px solid var(--purple-border);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    padding: 3rem 1rem;
+    background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-dark) 100%);
+    border-bottom: 1px solid var(--border-color);
 }
 
-h1 {
-    margin: 0;
-    font-size: 3rem;
-    color: var(--text-title);
-    text-shadow: 0 0 10px var(--purple-accent); /* Brillo sutil */
-    letter-spacing: 2px;
+.hero h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
 }
 
-/* Contenedor Principal */
+.hero p {
+    color: var(--text-muted);
+}
+
+/* --- Principal y Grid --- */
 main {
+    flex: 1;
     width: 90%;
     max-width: 1200px;
-    padding: 40px 0;
+    margin: 2rem auto;
 }
 
-/* Cuadrícula de obras */
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 2rem;
 }
 
-/* Tarjetas de cada obra */
+.hidden {
+    display: none !important;
+}
+
+/* --- Tarjetas de Manga --- */
 .manga-card {
-    background-color: var(--bg-card);
-    border: 2px solid var(--purple-border);
-    border-radius: 12px; /* Esquinas redondeadas */
+    background: var(--bg-card);
+    border-radius: 12px;
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s;
+    border: 1px solid transparent;
     cursor: pointer;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    position: relative;
 }
 
-/* Efecto al pasar el ratón */
 .manga-card:hover {
-    transform: translateY(-8px);
-    border-color: var(--purple-accent);
-    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
+    transform: translateY(-10px);
+    border-color: var(--primary);
+    box-shadow: 0 10px 20px rgba(139, 92, 246, 0.15);
 }
 
-/* Contenedor de la portada */
 .cover-container {
     width: 100%;
-    aspect-ratio: 2/3; /* Proporción clásica de manga */
-    background-color: var(--bg-base);
-    overflow: hidden;
+    aspect-ratio: 2/3;
+    background: #000;
+    position: relative;
 }
 
 .cover-container img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: opacity 0.3s;
 }
 
-/* Título de la obra */
-.manga-title {
-    padding: 15px;
+.manga-card:hover .cover-container img {
+    opacity: 0.7; /* Oscurece un poco la imagen al pasar el mouse */
+}
+
+.manga-info {
+    padding: 1rem;
     text-align: center;
-    font-size: 1.1rem;
-    font-weight: bold;
-    margin: 0;
+}
+
+.manga-title {
+    font-size: 1rem;
+    font-weight: 600;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; /* Pone "..." si el nombre es muy largo */
+    text-overflow: ellipsis;
+}
+
+/* --- Loader Animado --- */
+.loader {
+    width: 50px;
+    height: 50px;
+    border: 5px solid var(--bg-card);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 3rem auto;
+}
+
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+
+#no-results {
+    text-align: center;
+    color: var(--text-muted);
+    margin-top: 2rem;
+    font-size: 1.2rem;
+}
+
+/* --- Footer --- */
+footer {
+    background: var(--bg-card);
+    padding: 2rem;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    margin-top: auto;
+}
+
+.staff-credits {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
 }
