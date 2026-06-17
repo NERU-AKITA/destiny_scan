@@ -1,7 +1,7 @@
 // === CONFIGURACIÓN ===
-const API_KEY = 'TU_API_KEY_AQUI'; 
+const API_KEY = 'AIzaSyDaoyZ2z39X0tyOUhQiNJmbnRmUX28XcI0'; 
 // Este es el ID de la carpeta principal que se llama "proyectos"
-const MASTER_FOLDER_ID = 'TU_ID_DE_LA_CARPETA_PROYECTOS_AQUI'; 
+const MASTER_FOLDER_ID = 'proyectos'; 
 // =====================
 
 // Variables globales
